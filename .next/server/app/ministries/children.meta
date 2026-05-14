@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/ministries/layout,_N_T_/ministries/children/layout,_N_T_/ministries/children/page,_N_T_/ministries/children"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/ministries/children/__PAGE__",
+    "/ministries/children",
+    "/ministries",
+    "/_index",
+    "/_head"
+  ]
+}

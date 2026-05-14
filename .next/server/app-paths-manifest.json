@@ -1,0 +1,19 @@
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/about/page": "app/about/page.js",
+  "/api/capture-order/route": "app/api/capture-order/route.js",
+  "/api/create-order/route": "app/api/create-order/route.js",
+  "/api/gallery/route": "app/api/gallery/route.js",
+  "/donate/cancel/page": "app/donate/cancel/page.js",
+  "/donate/page": "app/donate/page.js",
+  "/donate/verify/page": "app/donate/verify/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/gallery/page": "app/gallery/page.js",
+  "/impressum/page": "app/impressum/page.js",
+  "/ministries/children/page": "app/ministries/children/page.js",
+  "/ministries/page": "app/ministries/page.js",
+  "/ministries/youth/page": "app/ministries/youth/page.js",
+  "/page": "app/page.js",
+  "/statement-of-faith/page": "app/statement-of-faith/page.js"
+}

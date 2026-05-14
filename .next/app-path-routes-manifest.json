@@ -1,0 +1,19 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/about/page": "/about",
+  "/api/capture-order/route": "/api/capture-order",
+  "/api/create-order/route": "/api/create-order",
+  "/api/gallery/route": "/api/gallery",
+  "/donate/cancel/page": "/donate/cancel",
+  "/donate/page": "/donate",
+  "/donate/verify/page": "/donate/verify",
+  "/favicon.ico/route": "/favicon.ico",
+  "/gallery/page": "/gallery",
+  "/impressum/page": "/impressum",
+  "/ministries/children/page": "/ministries/children",
+  "/ministries/page": "/ministries",
+  "/ministries/youth/page": "/ministries/youth",
+  "/page": "/",
+  "/statement-of-faith/page": "/statement-of-faith"
+}

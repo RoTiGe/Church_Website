@@ -1,0 +1,11 @@
+{
+  "pages": {},
+  "app": {
+    "[project]/src/app/statement-of-faith/page": [
+      "static/media/0c8f209abc35ee02-s.p.03rqv30url-~q.woff2",
+      "static/media/47df9ba1c7236d3b-s.p.0cqfp9mgbqxvb.woff2"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pagesUsingSizeAdjust": false
+}
