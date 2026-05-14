@@ -5,9 +5,9 @@ import { useLanguage } from "@/context/LanguageContext";
 import { ChevronDown } from "lucide-react";
 
 const LANGUAGES = [
-    { code: "en", label: "English", flag: "🇬🇧" },
-    { code: "de", label: "Deutsch", flag: "🇩🇪" },
-    { code: "am", label: "Amharic", flag: "🇪🇹" },
+    { code: "en", label: "English" },
+    { code: "de", label: "Deutsch" },
+    { code: "am", label: "Amharic" },
 ];
 
 export default function LanguageSwitcher({ sidebar }) {
@@ -35,9 +35,9 @@ export default function LanguageSwitcher({ sidebar }) {
             {/* Trigger button */}
             <button
                 onClick={() => setOpen(!open)}
-                className={`flex justify-center border border-yellow-500 ${sidebar ? "w-full" : "w-16"} items-center gap-2 py-2 bg-black/60 text-white rounded-md font-heading text-sm hover:bg-black/80 transition`}
+                className={`flex justify-center border border-yellow-500 ${sidebar ? "w-full" : "min-w-[7rem] px-4"} items-center gap-2 py-2 bg-black/60 text-white rounded-md font-heading text-sm hover:bg-black/80 transition`}
             >
-                <span>{currentLang?.flag}</span>
+                <span>{currentLang?.label}</span>
                 <ChevronDown
                     size={16}
                     className={`transition-transform ${open ? "rotate-180" : ""}`}
@@ -54,10 +54,9 @@ export default function LanguageSwitcher({ sidebar }) {
                                     changeLanguage(language.code);
                                     setOpen(false);
                                 }}
-                                className={`flex items-center gap-2 w-full px-3 py-2 text-sm hover:bg-yellow-100 transition ${lang === language.code ? "bg-yellow-200 font-medium" : ""
+                                className={`flex items-center w-full px-3 py-2 text-sm hover:bg-yellow-100 transition ${lang === language.code ? "bg-yellow-200 font-medium" : ""
                                     }`}
                             >
-                                <span>{language.flag}</span>
                                 <span>{language.label}</span>
                             </button>
                         </li>

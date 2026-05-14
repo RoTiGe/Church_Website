@@ -37,12 +37,12 @@ export default function NavDropdown({ label, links }) {
 
             {/* Dropdown menu */}
             {open && (
-                <ul className="absolute mt-2 bg-white text-black rounded-md shadow-lg border border-gray-200 w-40 z-50">
+                <ul className="absolute mt-2 bg-white text-black rounded-md shadow-lg border border-gray-200 min-w-[12rem] z-50">
                     {links.map((link) => (
                         <li key={link.href}>
                             <Link
                                 href={link.href}
-                                className="block px-4 py-2 text-sm hover:bg-yellow-100"
+                                className="block px-4 py-2 text-sm whitespace-nowrap hover:bg-yellow-100"
                                 onClick={() => setOpen(false)}
                             >
                                 {link.label}

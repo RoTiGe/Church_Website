@@ -5,10 +5,12 @@ import { getContent } from "@/lib/getMessages";
 import Hero from "@/components/homePage/Hero";
 import DonationSection from "@/components/homePage/DonationSection";
 import Link from "next/link";
+import { ArrowRight, Baby, Users } from "lucide-react";
 
 export default function HomePage() {
   const { lang } = useLanguage();
   const messages = getContent(lang, "home");
+  const ministriesMessages = getContent(lang, "ministries");
 
   return (
     <>
@@ -83,37 +85,63 @@ export default function HomePage() {
       </section>
 
       <section className="bg-[#f9f7f2] py-20">
-        {" "}
-        <div className="max-w-6xl mx-auto px-6">
-          {" "}
+        <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-3xl font-heading text-center mb-12">
-            {" "}
-            {messages.ministries.title}{" "}
-          </h2>{" "}
-          <div className="grid md:grid-cols-2 gap-8">
-            {" "}
-            {messages.ministries.list.map((item, i) => (
-              <div
-                key={i}
-                className="p-8 bg-white rounded-xl shadow hover:shadow-lg transition"
-              >
-                {" "}
-                <h3 className="text-xl font-heading mb-3">
-                  {" "}
-                  {item.title}{" "}
-                </h3>{" "}
-                <p className="text-gray-700 mb-6"> {item.text} </p>{" "}
+            {messages.ministries.title}
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-12">
+
+            {/* Youth Ministry */}
+            <div className="group bg-white rounded-[3rem] overflow-hidden border border-stone-100 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col">
+              <div className="p-12">
+                <div className="w-16 h-16 bg-slate-900 rounded-2xl flex items-center justify-center mb-8 text-yellow-500 group-hover:scale-110 transition-transform duration-500">
+                  <Users size={32} />
+                </div>
+                <h2 className="text-3xl font-heading mb-4 text-slate-900">{ministriesMessages.youthMinistry.title}</h2>
+                <p className="text-stone-500 mb-8 leading-relaxed">
+                  {ministriesMessages.youthMinistry.description}
+                </p>
+
                 <Link
-                  href={item.link}
-                  className="text-yellow-600 font-medium hover:underline"
+                  href="/ministries/youth"
+                  className="inline-flex items-center gap-3 text-slate-900 font-bold uppercase text-xs tracking-widest group/link"
                 >
-                  {" "}
-                  {item.cta}{" "}
-                </Link>{" "}
+                  {ministriesMessages.youthMinistry.cta}
+                  <span className="w-8 h-8 rounded-full bg-yellow-500 flex items-center justify-center group-hover/link:translate-x-2 transition-transform">
+                    <ArrowRight size={14} />
+                  </span>
+                </Link>
               </div>
-            ))}{" "}
-          </div>{" "}
-        </div>{" "}
+              <div className="h-2 bg-slate-900 mt-auto"></div>
+            </div>
+
+            {/* Children's Ministry */}
+            <div className="group bg-white rounded-[3rem] overflow-hidden border border-stone-100 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col">
+              <div className="p-12">
+                <div className="w-16 h-16 bg-yellow-500 rounded-2xl flex items-center justify-center mb-8 text-slate-900 group-hover:scale-110 transition-transform duration-500">
+                  <Baby size={32} />
+                </div>
+                <h2 className="text-3xl font-heading mb-4 text-slate-900">{ministriesMessages.childrenMinistry.title}</h2>
+                <p className="text-stone-500 mb-8 leading-relaxed">
+                  {ministriesMessages.childrenMinistry.description}
+                </p>
+
+                <Link
+                  href="/ministries/children"
+                  className="inline-flex items-center gap-3 text-slate-900 font-bold uppercase text-xs tracking-widest group/link"
+                >
+                  {ministriesMessages.childrenMinistry.cta}
+                  <span className="w-8 h-8 rounded-full bg-slate-900 text-yellow-500 flex items-center justify-center group-hover/link:translate-x-2 transition-transform">
+                    <ArrowRight size={14} />
+                  </span>
+                </Link>
+              </div>
+              <div className="h-2 bg-yellow-500 mt-auto"></div>
+            </div>
+
+          </div>
+        </div>
       </section>
 
       <DonationSection content={messages.donationSection} />
