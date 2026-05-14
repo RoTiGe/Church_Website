@@ -1,41 +1,56 @@
-import { v2 as cloudinary } from 'cloudinary';
+import { readdir, readFile } from 'node:fs/promises';
+import path from 'node:path';
+import { imageSize } from 'image-size';
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+export const dynamic = 'force-dynamic';
+
+const GALLERY_DIR = path.join(process.cwd(), 'public', 'gallery');
+const IMAGE_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif']);
 
 export async function GET() {
-  if (!process.env.CLOUDINARY_CLOUD_NAME || !process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET) {
-    console.error("Cloudinary configuration is missing.");
-    return Response.json({ error: "Missing Cloudinary configuration." }, { status: 500 });
-  }
-
   try {
+    let yearEntries;
+    try {
+      yearEntries = await readdir(GALLERY_DIR, { withFileTypes: true });
+    } catch (err) {
+      if (err.code === 'ENOENT') return Response.json([]);
+      throw err;
+    }
 
-    const { resources } = await cloudinary.search
-      .expression('folder:gallery/*')
-      .sort_by('created_at', 'desc')
-      .max_results(500)
-      .execute();
+    const images = [];
+    for (const yearEntry of yearEntries) {
+      if (!yearEntry.isDirectory()) continue;
+      const year = yearEntry.name;
+      const yearPath = path.join(GALLERY_DIR, year);
+      const files = await readdir(yearPath);
 
-    const formattedImages = resources.map(res => {
+      for (const file of files) {
+        const ext = path.extname(file).toLowerCase();
+        if (!IMAGE_EXTENSIONS.has(ext)) continue;
 
-      // split folder name to get the year part
-      const folderParts = res.asset_folder.split('/');
-      const year = folderParts[folderParts.length - 1];
+        const filePath = path.join(yearPath, file);
+        let width;
+        let height;
+        try {
+          const buf = await readFile(filePath);
+          ({ width, height } = imageSize(buf));
+        } catch (err) {
+          console.warn(`Could not read dimensions for ${filePath}:`, err.message);
+        }
 
-      return {
-        id: res.asset_id,
-        url: res.secure_url,
-        year: year
-      };
-    });
+        images.push({
+          id: `${year}/${file}`,
+          url: `/gallery/${encodeURIComponent(year)}/${encodeURIComponent(file)}`,
+          year,
+          width,
+          height,
+        });
+      }
+    }
 
-    return Response.json(formattedImages);
+    return Response.json(images);
   } catch (error) {
-    console.log("Error fetching galery images: ", error)
+    console.error("Error fetching gallery images: ", error);
     return Response.json({ error: "Failed to fetch images" }, { status: 500 });
   }
 }

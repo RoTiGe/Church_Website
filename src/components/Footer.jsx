@@ -16,8 +16,22 @@ const Footer = () => {
           <h4 className="font-semibold mb-3">{messages.contact.title}</h4>
           <p>{messages.contact.address}: Regentenstraße 78-80, 51063 Köln</p>
           <p className="mt-2">{messages.contact.representative}: Haileselassie G. Gebrehiwot</p>
-          <p className="mt-2">{messages.contact.phone}: [Add]</p>
-          <p className="mt-2">{messages.contact.email}: [Add]</p>
+          <p className="mt-2">
+            {messages.contact.phone}:{" "}
+            <a href="tel:+4915566758443" className="hover:underline">
+              +49 15566 758443
+            </a>
+          </p>
+          <p className="mt-2">
+            {messages.contact.email}:{" "}
+            <a href="mailto:info@aeg-koeln.de" className="hover:underline">
+              info@aeg-koeln.de
+            </a>
+            {" / "}
+            <a href="mailto:kontakt@aeg-koeln.de" className="hover:underline">
+              kontakt@aeg-koeln.de
+            </a>
+          </p>
         </div>
 
         {/* Column 2: Quick Links */}

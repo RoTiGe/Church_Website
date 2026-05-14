@@ -47,6 +47,11 @@
     "donationSection": {
       "cta": "Give a Donation",
       "note": "Giving is voluntary and given with love."
+    },
+    "visitUs": {
+      "title": "Visit Us",
+      "address": "Regentenstraße 78-80, 51063 Köln",
+      "cta": "Open in Google Maps"
     }
   },
   "about": {

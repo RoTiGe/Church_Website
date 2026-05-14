@@ -145,6 +145,38 @@ export default function HomePage() {
       </section>
 
       <DonationSection content={messages.donationSection} />
+
+      <section className="bg-white py-20">
+        <div className="max-w-5xl mx-auto px-6 text-center">
+          <h2 className="text-3xl font-heading mb-4">
+            {messages.visitUs.title}
+          </h2>
+          <p className="text-gray-700 mb-8">{messages.visitUs.address}</p>
+
+          <div className="overflow-hidden rounded-2xl shadow-md border border-stone-100">
+            <iframe
+              title={messages.visitUs.title}
+              src="https://www.google.com/maps?q=Regentenstra%C3%9Fe+78-80%2C+51063+K%C3%B6ln&output=embed"
+              width="100%"
+              height="420"
+              style={{ border: 0 }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+          </div>
+
+          <a
+            href="https://www.google.com/maps?q=Regentenstra%C3%9Fe+78-80%2C+51063+K%C3%B6ln"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 mt-6 text-slate-900 font-bold uppercase text-xs tracking-widest hover:underline"
+          >
+            {messages.visitUs.cta}
+            <ArrowRight size={14} />
+          </a>
+        </div>
+      </section>
     </>
   );
 }

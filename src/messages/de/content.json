@@ -47,6 +47,11 @@
     "donationSection": {
       "cta": "Spenden Sie jetzt!",
       "note": "Geben ist freiwillig und geschieht aus Liebe."
+    },
+    "visitUs": {
+      "title": "Besuchen Sie uns",
+      "address": "Regentenstraße 78-80, 51063 Köln",
+      "cta": "In Google Maps öffnen"
     }
   },
   "about": {

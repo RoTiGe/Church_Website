@@ -46,8 +46,22 @@ export default function ImpressumPage() {
                         <h2 className="text-xl font-heading mb-3">
                             {messages.contact.title}
                         </h2>
-                        <p className="text-gray-700">{messages.contact.phone}: [Add]</p>
-                        <p className="text-gray-700">{messages.contact.email}: [Add]</p>
+                        <p className="text-gray-700">
+                            {messages.contact.phone}:{" "}
+                            <a href="tel:+4915566758443" className="hover:underline">
+                                +49 15566 758443
+                            </a>
+                        </p>
+                        <p className="text-gray-700">
+                            {messages.contact.email}:{" "}
+                            <a href="mailto:info@aeg-koeln.de" className="hover:underline">
+                                info@aeg-koeln.de
+                            </a>
+                            {" / "}
+                            <a href="mailto:kontakt@aeg-koeln.de" className="hover:underline">
+                                kontakt@aeg-koeln.de
+                            </a>
+                        </p>
                     </section>
 
                     {/* Register */}

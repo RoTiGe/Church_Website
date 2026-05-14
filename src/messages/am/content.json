@@ -47,6 +47,11 @@
     "donationSection": {
       "cta": "ልገሳ ይስጡ",
       "note": "መስጠት በፈቃደኝነት የሚሰጥ እና በፍቅር የሚሰጥ ነው።"
+    },
+    "visitUs": {
+      "title": "ይጎብኙን",
+      "address": "Regentenstraße 78-80, 51063 Köln",
+      "cta": "በGoogle Maps ይክፈቱ"
     }
   },
   "about": {
