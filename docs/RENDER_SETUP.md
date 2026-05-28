@@ -86,8 +86,10 @@ or restarts, these folders are wiped:
 
 - `data/events.json` (all admin-posted events)
 - `data/event-images/` (uploaded event photos)
+- `data/gallery-uploads/<year>/` (admin-uploaded gallery photos)
+- `data/gallery-meta.json` (gallery captions)
 
-To keep events between deploys you must either:
+To keep this data between deploys you must either:
 
 1. **Attach a Render persistent disk** (≈ $1/month per GB):
    - Render dashboard → your service → **Disks** → **Add Disk**
@@ -98,7 +100,8 @@ To keep events between deploys you must either:
 2. Or move events to a hosted database and images to object storage (S3 etc.).
    This requires code changes — ask before going this route.
 
-Until one of these is done, **assume any event you post may disappear at the next deploy.**
+Until one of these is done, **assume any event you post or gallery photo
+you upload may disappear at the next deploy.**
 
 ---
 
