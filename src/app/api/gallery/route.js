@@ -44,6 +44,8 @@ export async function GET() {
           year,
           width,
           height,
+          caption: '',
+          source: 'committed',
         });
       }
     }

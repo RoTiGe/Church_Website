@@ -1,0 +1,132 @@
+PULLING FACEBOOK PHOTOS INTO THE WEBSITE GALLERY — FEASIBILITY NOTES
+=====================================================================
+
+SHORT ANSWER
+------------
+Yes, technically possible, but the practical reality is more complicated
+than it sounds.
+
+
+TWO VERY DIFFERENT SCENARIOS
+----------------------------
+
+  Source                | Difficulty             | Maintenance burden
+  ----------------------+------------------------+-------------------------
+  A Facebook Page       | Moderate — one-time    | Low (page tokens can be
+  (e.g. a church page)  | setup                  | made long-lived)
+  ----------------------+------------------------+-------------------------
+  A personal Facebook   | Hard                   | High (re-authentication
+  account               |                        | every ~60 days, plus
+                        |                        | Meta's app-review
+                        |                        | process if anyone other
+                        |                        | than you uses it)
+
+
+WHAT IT ACTUALLY TAKES
+----------------------
+You would need to:
+
+1. Register a Facebook App on https://developers.facebook.com
+
+2. Request permissions:
+     - pages_read_engagement + pages_show_list (for a Page), OR
+     - user_photos (for a personal account)
+
+3. Go through App Review by Meta if anyone besides you uses it. This
+   process has gotten harder every year and Meta rejects many apps that
+   don't have a clear public-facing use case.
+
+4. Get an access token:
+     - Page: exchange a short-lived token for a permanent Page Access Token.
+     - Personal account: tokens are valid 60 days max and must be refreshed.
+
+5. Call the Graph API (/<page-id>/photos or /me/photos) from your server,
+   download the images, and either:
+     - Serve them on-demand (proxy through your server), or
+     - Sync them periodically into the existing public/gallery/<year>/
+       folder structure.
+
+
+REALISTIC OPTIONS, RANKED
+-------------------------
+
+1. MANUAL DROP INTO THE GALLERY FOLDER (what you have now)
+   - Zero infrastructure, fully under your control.
+   - Only cost is a developer's time to copy files in.
+
+2. EMBED A FACEBOOK "PAGE" WIDGET ON THE GALLERY PAGE
+   - Facebook gives you an <iframe> you can paste.
+   - Shows the latest photos automatically.
+   PROS:
+     - Zero backend work.
+     - Always current.
+   CONS:
+     - Looks like a Facebook box, not your site's design.
+     - Relies on the visitor being logged into Facebook to see everything.
+     - Does not match your current gallery styling.
+
+3. THIRD-PARTY AGGREGATOR (Juicer.io, Curator.io, Tagembed, etc.)
+   - They handle the Facebook API, token refresh, and caching.
+   - Drop their widget on your site.
+   PROS:
+     - Very low maintenance.
+   CONS:
+     - ~$15 – $40 per month.
+     - Design constraints.
+     - Vendor lock-in.
+
+4. CUSTOM FACEBOOK → GALLERY SYNC
+   - Your server runs a scheduled job (cron, or a Render cron job) that
+     hits the Graph API, downloads new photos, and saves them under
+     public/gallery/<year>/.
+   PROS:
+     - Photos look native to your site.
+     - Works offline once synced.
+   CONS:
+     - Real engineering work.
+     - Needs a Meta app + app review.
+     - Token refresh logic must be reliable.
+     - Breaks when Meta changes API rules (which happens every couple of years).
+
+5. PULL FROM FACEBOOK ONLY AT BUILD TIME
+   - Slightly simpler version of #4 — the sync runs during the Render
+     build rather than continuously.
+   PROS:
+     - No live API calls.
+     - No token expiry causing mid-day breakage.
+   CONS:
+     - Still requires the app and token.
+     - You need to rebuild to see new photos.
+
+
+HONEST RECOMMENDATION FOR YOUR SITUATION
+----------------------------------------
+Given the size of this church site, and that there are already Render
+deployment issues to sort out, building a Facebook integration is
+probably not worth it. Reasons:
+
+  - Meta's app review process is genuinely painful for non-commercial
+    use cases.
+  - Tokens break silently; the gallery would mysteriously empty 60 days
+    later.
+  - The current "drop photos into public/gallery/<year>/" workflow is
+    essentially unbreakable — files are files.
+  - For a small congregation, the time it takes a volunteer to download
+    10 photos from a Facebook event and upload them is far less than the
+    time spent keeping a Facebook integration alive.
+
+If the real goal is "less manual work for whoever updates the gallery,"
+the better path is:
+
+  > Add an admin-side gallery upload (similar to the events form we built).
+  > The administrator picks photos from their phone in a browser form,
+  > and the server saves them into public/gallery/<year>/. No Facebook
+  > involvement.
+
+
+POSSIBLE NEXT STEPS
+-------------------
+(a) Build the admin-side gallery upload form (similar to the events form).
+(b) Investigate the Facebook Page option specifically (need the Facebook
+    Page URL first, to check what is available).
+(c) Park this entirely until the Render deploy issue is sorted out.
